@@ -1,0 +1,59 @@
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    restart: unless-stopped
+    ports:
+      # DNS ports
+      - "53:53/tcp"
+      - "53:53/udp"
+      # Web interface
+      - "3000:3000/tcp"
+      # Admin interface
+      - "80:80/tcp"
+    user: "1000:1000"
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      # App data
+      - ./adguard/work:/opt/adguardhome/work
+      # Configuration
+      - ./adguard/conf:/opt/adguardhome/conf
+    networks:
+      - adguard_network
+    environment:
+      - TZ=Asia/Manila
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Asia/Manila
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_SCHEDULE=0 0 1 * * *  # Run daily at 1:00 AM
+      - WATCHTOWER_NOTIFICATIONS=shoutrrr
+      - "WATCHTOWER_NOTIFICATION_URL=smtp://${MAIL_USERNAME}:${MAIL_PASSWORD}@${MAIL_HOST}:${MAIL_PORT}/?from=${MAIL_FROM}&to=${MAIL_TO}"
+
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Manila
+      - CLI_ARGS= #optional
+    volumes:
+      - ./duplicati/config:/config
+      - ./duplicati/backups:/backups
+      - ./:/source
+    ports:
+      - "8200:8200"
+    restart: unless-stopped
+
+networks:
+  adguard_network:
+    name: adguard_network
+    driver: bridge
