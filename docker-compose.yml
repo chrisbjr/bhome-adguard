@@ -11,7 +11,6 @@ services:
       - "3000:3000/tcp"
       # Admin interface
       - "80:80/tcp"
-    user: "1000:1000"
     security_opt:
       - no-new-privileges:true
     volumes:
