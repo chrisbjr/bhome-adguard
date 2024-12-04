@@ -7,3 +7,5 @@
 @@||app.getsentry.com^
 @@||*.ingest.sentry.io^
 @@||ingest.sentry.io^
+@@||sentry-cdn.com^
+@@||*.sentry-cdn.com^
