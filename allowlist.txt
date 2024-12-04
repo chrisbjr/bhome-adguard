@@ -1,0 +1,9 @@
+! Title: Sentry.io Allowlist
+! Description: Rules to allow Sentry.io error tracking functionality
+! Last updated: 2024-12-04
+
+@@||sentry.io^
+@@||browser.sentry-cdn.com^
+@@||app.getsentry.com^
+@@||*.ingest.sentry.io^
+@@||ingest.sentry.io^
