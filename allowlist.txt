@@ -9,3 +9,4 @@
 @@||ingest.sentry.io^
 @@||sentry-cdn.com^
 @@||*.sentry-cdn.com^
+@@||*.discord.com^
