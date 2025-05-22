@@ -10,3 +10,4 @@
 @@||sentry-cdn.com^
 @@||*.sentry-cdn.com^
 @@||*.discord.com^
+@@||analytics.google.com^
