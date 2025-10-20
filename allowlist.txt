@@ -11,3 +11,5 @@
 @@||*.sentry-cdn.com^
 @@||*.discord.com^
 @@||analytics.google.com^
+@@||*.protonvpn.com^
+@@||*.proton.me
